@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/shared/config";
 import { listPosts } from "@/entities/post/server";
-import { projects } from "@/entities/project";
+import { listProjects } from "@/entities/project/server";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");
   const now = new Date();
-  const posts = await listPosts();
+  const [posts, projects] = await Promise.all([listPosts(), listProjects()]);
 
   const staticEntries: MetadataRoute.Sitemap = [
     { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },

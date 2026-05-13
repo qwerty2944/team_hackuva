@@ -6,7 +6,7 @@ import { ArrowLeft, Clock, Pencil } from "lucide-react";
 import { PostBody } from "@/entities/post";
 import { getPost } from "@/entities/post/server";
 import { getCurrentUser } from "@/entities/user/server";
-import { getProject } from "@/entities/project";
+import { getProject } from "@/entities/project/server";
 import { CommentThread } from "@/widgets/comment-thread";
 import { LoadingOverlay } from "@/shared/ui/loading-overlay";
 import { Badge } from "@/shared/ui/badge";
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const [post, current] = await Promise.all([getPost(slug), getCurrentUser()]);
   if (!post) notFound();
 
-  const project = post.projectSlug ? getProject(post.projectSlug) : undefined;
+  const project = post.projectSlug ? await getProject(post.projectSlug) : null;
   const isAdmin = current?.profile.role === "admin";
 
   return (

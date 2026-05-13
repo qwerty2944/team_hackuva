@@ -1,11 +1,11 @@
 "use client";
 
-import { ProjectCard, useProjects, projects as seed } from "@/entities/project";
+import { ProjectCard, useProjects } from "@/entities/project";
 import { Skeleton } from "@/shared/ui/skeleton";
 
 export function ProjectShowcase() {
-  const { data, isLoading, isError } = useProjects();
-  const items = data ?? (isError ? seed : []);
+  const { data, isLoading } = useProjects();
+  const items = data ?? [];
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">

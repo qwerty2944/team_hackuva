@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/entities/user/server";
-import { projects } from "@/entities/project";
+import { listProjects } from "@/entities/project/server";
 import { PostForm } from "@/features/blog-compose";
 
 export const metadata: Metadata = { title: "새 글" };
@@ -11,6 +11,7 @@ export default async function NewPostPage() {
   if (!current || current.profile.role !== "admin") {
     redirect("/blog");
   }
+  const projects = await listProjects();
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">

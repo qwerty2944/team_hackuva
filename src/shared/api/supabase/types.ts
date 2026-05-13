@@ -112,6 +112,13 @@ export type Database = {
             referencedRelation: "profiles";
             referencedColumns: ["id"];
           },
+          {
+            foreignKeyName: "blog_posts_project_slug_fkey";
+            columns: ["project_slug"];
+            isOneToOne: false;
+            referencedRelation: "projects";
+            referencedColumns: ["slug"];
+          },
         ];
       };
       guestbook_entries: {
@@ -161,6 +168,65 @@ export type Database = {
           updated_at?: string;
         };
         Relationships: [];
+      };
+      projects: {
+        Row: {
+          accent: string;
+          author_id: string;
+          created_at: string;
+          description: string;
+          features: string[];
+          id: number;
+          name: string;
+          slug: string;
+          sort_order: number;
+          stack: string[];
+          status: string;
+          tagline: string;
+          updated_at: string;
+          url: string;
+        };
+        Insert: {
+          accent?: string;
+          author_id: string;
+          created_at?: string;
+          description: string;
+          features?: string[];
+          id?: number;
+          name: string;
+          slug: string;
+          sort_order?: number;
+          stack?: string[];
+          status?: string;
+          tagline: string;
+          updated_at?: string;
+          url: string;
+        };
+        Update: {
+          accent?: string;
+          author_id?: string;
+          created_at?: string;
+          description?: string;
+          features?: string[];
+          id?: number;
+          name?: string;
+          slug?: string;
+          sort_order?: number;
+          stack?: string[];
+          status?: string;
+          tagline?: string;
+          updated_at?: string;
+          url?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "projects_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
     Views: { [_ in never]: never };

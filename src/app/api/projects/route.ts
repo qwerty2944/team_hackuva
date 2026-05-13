@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { projects } from "@/entities/project";
+import { listProjects } from "@/entities/project/server";
 
-export function GET() {
+export async function GET() {
+  const projects = await listProjects();
   return NextResponse.json({ projects });
 }

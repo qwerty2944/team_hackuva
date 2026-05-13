@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/shared/config";
-import { projects } from "@/entities/project";
+import { listProjects } from "@/entities/project/server";
 import { Separator } from "@/shared/ui/separator";
 import { buttonVariants } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   description: "Team Hackuva가 누구인지, 무엇을 만드는지.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const projects = await listProjects();
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
       <header className="space-y-4">

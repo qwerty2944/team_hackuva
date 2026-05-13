@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
-import { getProject, projects } from "@/entities/project";
+import { ArrowLeft, ArrowUpRight, Check, Pencil } from "lucide-react";
+import { getProject } from "@/entities/project/server";
 import { PostCard } from "@/entities/post";
 import { listPosts } from "@/entities/post/server";
+import { getCurrentUser } from "@/entities/user/server";
 import { Badge } from "@/shared/ui/badge";
 import { buttonVariants } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
@@ -12,15 +13,11 @@ import { Separator } from "@/shared/ui/separator";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) return {};
   const url = `/projects/${project.slug}`;
   return {
@@ -44,21 +41,38 @@ export async function generateMetadata({
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const [project, allPosts, current] = await Promise.all([
+    getProject(slug),
+    listPosts(),
+    getCurrentUser(),
+  ]);
   if (!project) notFound();
 
-  const allPosts = await listPosts();
   const related = allPosts.filter((p) => p.projectSlug === project.slug);
+  const isAdmin = current?.profile.role === "admin";
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
-      <Link
-        href="/projects"
-        className="mb-8 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft className="size-3.5" />
-        프로젝트 전체
-      </Link>
+      <div className="mb-8 flex items-center justify-between gap-2">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="size-3.5" />
+          프로젝트 전체
+        </Link>
+        {isAdmin && (
+          <Link
+            href={`/projects/${project.slug}/edit`}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "gap-1.5",
+            )}
+          >
+            <Pencil className="size-3.5" /> 수정
+          </Link>
+        )}
+      </div>
 
       <header className="space-y-4">
         <div className="flex items-center gap-2">

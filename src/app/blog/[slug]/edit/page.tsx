@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { getCurrentUser } from "@/entities/user/server";
 import { getPost } from "@/entities/post/server";
-import { projects } from "@/entities/project";
+import { listProjects } from "@/entities/project/server";
 import { PostForm } from "@/features/blog-compose";
 
 export const metadata: Metadata = { title: "글 수정" };
@@ -15,7 +15,7 @@ export default async function EditPostPage({ params }: PageProps) {
   if (!current || current.profile.role !== "admin") {
     redirect(`/blog/${slug}`);
   }
-  const post = await getPost(slug);
+  const [post, projects] = await Promise.all([getPost(slug), listProjects()]);
   if (!post) notFound();
 
   return (
