@@ -8,6 +8,7 @@ export const siteConfig = {
     { href: "/", label: "홈" },
     { href: "/projects", label: "프로젝트" },
     { href: "/blog", label: "블로그" },
+    { href: "/guestbook", label: "방명록" },
     { href: "/about", label: "팀" },
   ],
 } as const;
