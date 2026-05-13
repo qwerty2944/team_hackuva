@@ -2,9 +2,9 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
-import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { LoadingButton } from "@/shared/ui/loading-button";
+import { PasswordInput } from "@/shared/ui/password-input";
 import {
   changePasswordAction,
   type ChangePasswordState,
@@ -28,10 +28,9 @@ export function ChangePasswordForm() {
     <form ref={formRef} action={formAction} className="grid gap-4">
       <div className="grid gap-1.5">
         <Label htmlFor="new-password">새 비밀번호</Label>
-        <Input
+        <PasswordInput
           id="new-password"
           name="password"
-          type="password"
           required
           minLength={6}
           autoComplete="new-password"
@@ -39,10 +38,9 @@ export function ChangePasswordForm() {
       </div>
       <div className="grid gap-1.5">
         <Label htmlFor="confirm-password">새 비밀번호 확인</Label>
-        <Input
+        <PasswordInput
           id="confirm-password"
           name="confirm"
-          type="password"
           required
           minLength={6}
           autoComplete="new-password"

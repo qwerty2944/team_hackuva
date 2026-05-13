@@ -12,13 +12,17 @@ export async function signupAction(
 ): Promise<SignupState> {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
+  const confirm = String(formData.get("confirm") ?? "");
   const displayName = String(formData.get("display_name") ?? "").trim();
 
-  if (!email || !password || !displayName) {
+  if (!email || !password || !confirm || !displayName) {
     return { error: "모든 항목을 입력해 주세요." };
   }
   if (password.length < 6) {
     return { error: "비밀번호는 최소 6자 이상이어야 합니다." };
+  }
+  if (password !== confirm) {
+    return { error: "비밀번호 확인이 일치하지 않습니다." };
   }
   if (displayName.length > 40) {
     return { error: "표시 이름은 40자 이하로 입력해 주세요." };

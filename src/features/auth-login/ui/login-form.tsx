@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { LoadingButton } from "@/shared/ui/loading-button";
+import { PasswordInput } from "@/shared/ui/password-input";
 import { loginAction, type LoginState } from "../api/actions";
 
 export function LoginForm({ next }: { next?: string }) {
@@ -29,10 +30,9 @@ export function LoginForm({ next }: { next?: string }) {
       </div>
       <div className="grid gap-1.5">
         <Label htmlFor="login-password">비밀번호</Label>
-        <Input
+        <PasswordInput
           id="login-password"
           name="password"
-          type="password"
           required
           autoComplete="current-password"
         />

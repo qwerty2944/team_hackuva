@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { LoadingButton } from "@/shared/ui/loading-button";
+import { PasswordInput } from "@/shared/ui/password-input";
 import { signupAction, type SignupState } from "../api/actions";
 
 export function SignupForm() {
@@ -39,14 +40,24 @@ export function SignupForm() {
       </div>
       <div className="grid gap-1.5">
         <Label htmlFor="signup-password">비밀번호</Label>
-        <Input
+        <PasswordInput
           id="signup-password"
           name="password"
-          type="password"
           required
           minLength={6}
           autoComplete="new-password"
           placeholder="6자 이상"
+        />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="signup-confirm">비밀번호 다시 입력</Label>
+        <PasswordInput
+          id="signup-confirm"
+          name="confirm"
+          required
+          minLength={6}
+          autoComplete="new-password"
+          placeholder="같은 비밀번호를 한 번 더"
         />
       </div>
       {state?.error ? (
