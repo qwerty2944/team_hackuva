@@ -1,0 +1,23 @@
+import type { Metadata } from "next";
+import { BlogList } from "@/widgets/blog-list";
+
+export const metadata: Metadata = {
+  title: "블로그",
+  description: "Team Hackuva가 만든 과정을 기록하는 곳.",
+};
+
+export default function BlogPage() {
+  return (
+    <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+      <header className="mb-10">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          블로그
+        </h1>
+        <p className="mt-3 max-w-2xl text-muted-foreground">
+          제품을 어떻게 만들었는지, 어떤 결정을 했는지에 대한 짧은 기록.
+        </p>
+      </header>
+      <BlogList />
+    </div>
+  );
+}
