@@ -69,13 +69,6 @@ export default function AboutPage() {
           ))}
         </ul>
       </section>
-
-      <section className="mt-10 rounded-md border border-dashed border-border/60 p-6 text-sm text-muted-foreground">
-        <p className="font-medium text-foreground">TODO</p>
-        <p className="mt-1">
-          팀원 이름·역할, 팀 이름의 유래, 연락처/이메일을 채워주세요.
-        </p>
-      </section>
     </div>
   );
 }
