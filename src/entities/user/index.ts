@@ -1,2 +1,2 @@
-export type { Profile, CurrentUser } from "./model/types";
+export type { Profile, CurrentUser, UserRole } from "./model/types";
 export { UserAvatar } from "./ui/user-avatar";

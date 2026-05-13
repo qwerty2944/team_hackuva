@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock } from "lucide-react";
-import { getPost, posts, PostBody } from "@/entities/post";
+import { ArrowLeft, Clock, Pencil } from "lucide-react";
+import { PostBody } from "@/entities/post";
+import { getPost } from "@/entities/post/server";
+import { getCurrentUser } from "@/entities/user/server";
 import { getProject } from "@/entities/project";
+import { CommentThread } from "@/widgets/comment-thread";
+import { LoadingOverlay } from "@/shared/ui/loading-overlay";
 import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
+import { cn } from "@/shared/lib/utils";
 
 type PageProps = { params: Promise<{ slug: string }> };
-
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) return {};
   const url = `/blog/${post.slug}`;
   return {
@@ -31,7 +34,7 @@ export async function generateMetadata({
       description: post.excerpt,
       url,
       publishedTime: post.publishedAt,
-      authors: [post.author],
+      authors: [post.author.display_name],
       tags: post.tags,
     },
     twitter: {
@@ -52,20 +55,34 @@ function formatDate(iso: string) {
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const [post, current] = await Promise.all([getPost(slug), getCurrentUser()]);
   if (!post) notFound();
 
   const project = post.projectSlug ? getProject(post.projectSlug) : undefined;
+  const isAdmin = current?.profile.role === "admin";
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
-      <Link
-        href="/blog"
-        className="mb-8 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeft className="size-3.5" />
-        블로그 전체
-      </Link>
+      <div className="mb-8 flex items-center justify-between gap-2">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="size-3.5" />
+          블로그 전체
+        </Link>
+        {isAdmin && (
+          <Link
+            href={`/blog/${post.slug}/edit`}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "sm" }),
+              "gap-1.5",
+            )}
+          >
+            <Pencil className="size-3.5" /> 수정
+          </Link>
+        )}
+      </div>
 
       <header className="space-y-4">
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
@@ -74,7 +91,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <Clock className="size-3" />
           <span>{post.readingMinutes}분 읽기</span>
           <span aria-hidden>·</span>
-          <span>{post.author}</span>
+          <span>{post.author.display_name}</span>
         </div>
         <h1 className="text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
           {post.title}
@@ -101,6 +118,12 @@ export default async function BlogPostPage({ params }: PageProps) {
       <Separator className="my-10" />
 
       <PostBody markdown={post.body} />
+
+      <Separator className="my-10" />
+
+      <Suspense fallback={<LoadingOverlay label="댓글 불러오는 중" />}>
+        <CommentThread postSlug={post.slug} />
+      </Suspense>
     </div>
   );
 }

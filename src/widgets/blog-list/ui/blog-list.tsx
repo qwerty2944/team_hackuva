@@ -1,24 +1,39 @@
 "use client";
 
-import { useMemo } from "react";
-import { PostCard, usePosts, posts as seed, allTags } from "@/entities/post";
+import Link from "next/link";
+import { Pencil } from "lucide-react";
+import { PostCard, usePosts } from "@/entities/post";
 import { SearchBar, TagFilter, useBlogFilters } from "@/features/blog-filters";
 import { Skeleton } from "@/shared/ui/skeleton";
+import { buttonVariants } from "@/shared/ui/button";
+import { cn } from "@/shared/lib/utils";
 
-export function BlogList() {
+export function BlogList({
+  tags,
+  isAdmin,
+}: {
+  tags: string[];
+  isAdmin: boolean;
+}) {
   const { searchQuery, selectedTag } = useBlogFilters();
-  const { data, isLoading, isError } = usePosts({
-    q: searchQuery,
-    tag: selectedTag,
-  });
-  const tags = useMemo(() => allTags(), []);
-  const items = data ?? (isError ? seed : []);
+  const { data, isLoading } = usePosts({ q: searchQuery, tag: selectedTag });
+  const items = data ?? [];
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <SearchBar />
-        <TagFilter tags={tags} />
+        <div className="flex items-center gap-2">
+          <TagFilter tags={tags} />
+          {isAdmin && (
+            <Link
+              href="/blog/new"
+              className={cn(buttonVariants({ size: "sm" }), "gap-1.5")}
+            >
+              <Pencil className="size-3.5" /> 새 글
+            </Link>
+          )}
+        </div>
       </div>
 
       {isLoading && items.length === 0 ? (

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { getProject, projects } from "@/entities/project";
-import { posts } from "@/entities/post";
 import { PostCard } from "@/entities/post";
+import { listPosts } from "@/entities/post/server";
 import { Badge } from "@/shared/ui/badge";
 import { buttonVariants } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
@@ -47,7 +47,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const related = posts.filter((p) => p.projectSlug === project.slug);
+  const allPosts = await listPosts();
+  const related = allPosts.filter((p) => p.projectSlug === project.slug);
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">

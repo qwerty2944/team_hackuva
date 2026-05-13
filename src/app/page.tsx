@@ -2,14 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/widgets/hero";
 import { ProjectShowcase } from "@/widgets/project-showcase";
-import { PostCard, posts } from "@/entities/post";
+import { PostCard } from "@/entities/post";
+import { listPosts } from "@/entities/post/server";
 import { buttonVariants } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
 
-export default function HomePage() {
-  const recent = [...posts]
-    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
-    .slice(0, 4);
+export default async function HomePage() {
+  const recent = (await listPosts()).slice(0, 4);
 
   return (
     <>

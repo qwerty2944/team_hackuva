@@ -20,6 +20,7 @@ export async function AuthMenu() {
     <UserDropdown
       displayName={current.profile.display_name}
       email={current.profile.email}
+      role={current.profile.role}
     />
   );
 }

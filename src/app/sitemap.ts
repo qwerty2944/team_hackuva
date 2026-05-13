@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/shared/config";
-import { posts } from "@/entities/post";
+import { listPosts } from "@/entities/post/server";
 import { projects } from "@/entities/project";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");
   const now = new Date();
+  const posts = await listPosts();
 
   const staticEntries: MetadataRoute.Sitemap = [
     { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
@@ -18,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
     url: `${base}/blog/${p.slug}`,
     lastModified: new Date(p.publishedAt),
-    changeFrequency: "monthly",
+    changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 

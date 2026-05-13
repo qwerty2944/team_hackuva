@@ -27,7 +27,8 @@ export async function loginAction(
     return { error: "이메일 또는 비밀번호가 올바르지 않습니다." };
   }
 
-  const target = SAFE_REDIRECT.test(nextParam) ? nextParam : "/guestbook";
+  const base = SAFE_REDIRECT.test(nextParam) ? nextParam : "/guestbook";
+  const target = base.includes("?") ? `${base}&welcome=1` : `${base}?welcome=1`;
   revalidatePath("/", "layout");
   redirect(target);
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { SiteHeader } from "@/widgets/site-header";
 import { SiteFooter } from "@/widgets/site-footer";
+import { WelcomeBridge } from "@/features/welcome-toast";
 import { siteConfig } from "@/shared/config";
 
 const geistSans = Geist({
@@ -84,6 +85,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>
+          <WelcomeBridge />
         </Providers>
       </body>
     </html>

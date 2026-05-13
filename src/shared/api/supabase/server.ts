@@ -36,8 +36,11 @@ export async function getCurrentSession() {
   if (!user) return null;
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, display_name, email")
+    .select("id, display_name, email, role")
     .eq("id", user.id)
     .maybeSingle();
-  return profile ? { user, profile } : null;
+  if (!profile) return null;
+  const role: "admin" | "member" =
+    profile.role === "admin" ? "admin" : "member";
+  return { user, profile: { ...profile, role } };
 }
