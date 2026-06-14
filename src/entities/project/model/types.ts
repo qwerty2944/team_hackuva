@@ -10,4 +10,5 @@ export type Project = {
   stack: string[];
   status: ProjectStatus;
   accent: string;
+  imageUrl: string | null;
 };

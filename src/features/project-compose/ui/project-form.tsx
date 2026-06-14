@@ -31,6 +31,7 @@ export function ProjectForm({
     stack: string[];
     status: "live" | "beta" | "wip";
     accent: string;
+    imageUrl: string | null;
   };
 }) {
   const [state, formAction] = useActionState<ProjectComposeState, FormData>(
@@ -86,6 +87,16 @@ export function ProjectForm({
           required
           defaultValue={initial?.url}
           placeholder="https://example.com"
+        />
+      </div>
+      <div className="grid gap-1.5">
+        <Label htmlFor="project-image">스크린샷 URL (선택)</Label>
+        <Input
+          id="project-image"
+          name="imageUrl"
+          type="text"
+          defaultValue={initial?.imageUrl ?? ""}
+          placeholder="예: /projects/my-site.png 또는 https://..."
         />
       </div>
       <div className="grid gap-1.5">

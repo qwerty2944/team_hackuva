@@ -30,6 +30,17 @@ export function ProjectCard({ project }: { project: Project }) {
           project.accent,
         )}
       />
+      {project.imageUrl && (
+        <div className="relative aspect-video overflow-hidden border-b border-border/60 bg-muted">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.imageUrl}
+            alt={`${project.name} 미리보기`}
+            loading="lazy"
+            className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
+      )}
       <CardHeader className="relative">
         <div className="flex items-start justify-between gap-2">
           <div className="space-y-1">

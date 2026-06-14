@@ -51,6 +51,7 @@ export async function saveProjectAction(
   const accent =
     String(formData.get("accent") ?? "").trim() ||
     "from-zinc-500/20 to-zinc-700/10";
+  const imageUrl = String(formData.get("imageUrl") ?? "").trim() || null;
 
   if (!name || !tagline || !description || !url) {
     return { ok: false, error: "이름, 태그라인, 소개, 라이브 URL은 필수입니다." };
@@ -73,6 +74,7 @@ export async function saveProjectAction(
         stack,
         status,
         accent,
+        image_url: imageUrl,
       })
       .eq("slug", existingSlug);
     if (error) return { ok: false, error: error.message };
@@ -102,6 +104,7 @@ export async function saveProjectAction(
     stack,
     status,
     accent,
+    image_url: imageUrl,
     author_id: current.profile.id,
   });
   if (error) return { ok: false, error: error.message };

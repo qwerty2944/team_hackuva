@@ -20,6 +20,7 @@ export async function generateMetadata({
   const project = await getProject(slug);
   if (!project) return {};
   const url = `/projects/${project.slug}`;
+  const images = project.imageUrl ? [project.imageUrl] : undefined;
   return {
     title: project.name,
     description: project.tagline,
@@ -30,11 +31,13 @@ export async function generateMetadata({
       title: project.name,
       description: project.tagline,
       url,
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title: project.name,
       description: project.tagline,
+      images,
     },
   };
 }
@@ -99,6 +102,22 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <ArrowUpRight className="ml-1.5 size-4" />
         </a>
       </header>
+
+      {project.imageUrl && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-8 block overflow-hidden rounded-xl border border-border/60 bg-muted shadow-sm transition-shadow hover:shadow-lg"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.imageUrl}
+            alt={`${project.name} 화면`}
+            className="w-full object-cover object-top"
+          />
+        </a>
+      )}
 
       <Separator className="my-10" />
 
