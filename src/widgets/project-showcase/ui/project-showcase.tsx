@@ -15,7 +15,7 @@ export function ProjectShowcase() {
             만든 것들
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            라이브 서비스 세 개. 카드를 누르면 라이브로 갑니다.
+            해마다 만든 것들. 카드를 누르면 자세히 보거나 라이브로 갑니다.
           </p>
         </div>
       </div>

@@ -8,7 +8,7 @@ const baseURL =
 export const http = axios.create({
   baseURL,
   timeout: 10_000,
-  headers: { "X-Client": "hackuva-blog" },
+  headers: { "X-Client": "qwerty2944-blog" },
 });
 
 http.interceptors.response.use(

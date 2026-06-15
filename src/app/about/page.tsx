@@ -6,8 +6,8 @@ import { buttonVariants } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
 
 export const metadata: Metadata = {
-  title: "팀 소개",
-  description: "Team Hackuva가 누구인지, 무엇을 만드는지.",
+  title: "소개",
+  description: "qwerty2944(최재영)가 누구인지, 무엇을 만드는지.",
 };
 
 export default async function AboutPage() {
@@ -19,11 +19,11 @@ export default async function AboutPage() {
           About
         </p>
         <h1 className="text-balance text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-          Team Hackuva.
+          qwerty2944.
         </h1>
         <p className="text-lg text-muted-foreground">
-          저희는 해커톤에서 만난 작은 팀이고, 아이디어를 라이브 서비스로
-          끝까지 끌고 가보는 걸 좋아합니다.
+          웹과 크로스플랫폼 앱을 만드는 개발자 최재영입니다. 아이디어를 라이브
+          서비스로 끝까지 끌고 가보는 걸 좋아합니다.
         </p>
         <a
           href={siteConfig.github}
@@ -38,7 +38,7 @@ export default async function AboutPage() {
       <Separator className="my-10" />
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold tracking-tight">우리가 믿는 것</h2>
+        <h2 className="text-xl font-semibold tracking-tight">제가 믿는 것</h2>
         <ul className="space-y-2 text-muted-foreground">
           <li>· 데모는 며칠, 라이브는 몇 주 안에.</li>
           <li>· 사용자 한 명에게 진짜로 쓸 만한 걸 만든다.</li>

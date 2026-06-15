@@ -35,6 +35,8 @@ export default async function EditProjectPage({ params }: PageProps) {
           status: project.status,
           accent: project.accent,
           imageUrl: project.imageUrl,
+          videoUrl: project.videoUrl,
+          year: project.year,
         }}
       />
     </div>

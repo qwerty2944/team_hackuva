@@ -15,11 +15,9 @@ export function SiteHeader() {
           className="group flex items-center gap-2 font-semibold tracking-tight"
         >
           <span className="grid size-7 place-items-center rounded-md bg-gradient-to-br from-foreground to-foreground/60 text-background">
-            <span className="text-[11px] font-bold">H</span>
+            <span className="text-[11px] font-bold">Q</span>
           </span>
-          <span>
-            Team <span className="text-muted-foreground">Hackuva</span>
-          </span>
+          <span>qwerty2944</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">

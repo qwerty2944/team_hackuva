@@ -1,15 +1,15 @@
 export const siteConfig = {
-  name: "Team Hackuva",
+  name: "qwerty2944",
   description:
-    "해커톤에서 시작해 라이브 서비스를 만드는 작은 팀, Team Hackuva의 블로그.",
-  url: "https://team-hackuva.vercel.app",
-  github: "https://github.com/qwerty2944/team_hackuva",
+    "웹·크로스플랫폼 앱을 만드는 개발자 qwerty2944(최재영)의 블로그.",
+  url: "https://hackuva.vercel.app",
+  github: "https://github.com/qwerty2944",
   nav: [
     { href: "/", label: "홈" },
     { href: "/projects", label: "프로젝트" },
     { href: "/blog", label: "블로그" },
     { href: "/guestbook", label: "방명록" },
-    { href: "/about", label: "팀" },
+    { href: "/about", label: "소개" },
   ],
 } as const;
 

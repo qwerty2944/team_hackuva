@@ -13,6 +13,78 @@ import { Separator } from "@/shared/ui/separator";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+function ProjectMedia({
+  videoUrl,
+  imageUrl,
+  url,
+  name,
+}: {
+  videoUrl: string | null;
+  imageUrl: string | null;
+  url: string;
+  name: string;
+}) {
+  if (videoUrl) {
+    const frame =
+      "mt-8 overflow-hidden rounded-xl border border-border/60 bg-black shadow-sm";
+    // 로컬 mp4/webm 파일 → 네이티브 플레이어
+    if (/\.(mp4|webm|mov)$/i.test(videoUrl)) {
+      return (
+        <div className={frame}>
+          <video
+            src={videoUrl}
+            poster={imageUrl ?? undefined}
+            controls
+            playsInline
+            preload="metadata"
+            className="aspect-video w-full bg-black"
+          />
+        </div>
+      );
+    }
+    const yt = videoUrl.match(
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/,
+    );
+    const drive = videoUrl.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+    const embed = yt
+      ? `https://www.youtube.com/embed/${yt[1]}`
+      : drive
+        ? `https://drive.google.com/file/d/${drive[1]}/preview`
+        : null;
+    if (embed) {
+      return (
+        <div className={frame}>
+          <iframe
+            src={embed}
+            title={`${name} 시연영상`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="aspect-video w-full"
+          />
+        </div>
+      );
+    }
+  }
+  if (imageUrl) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-8 block overflow-hidden rounded-xl border border-border/60 bg-muted shadow-sm transition-shadow hover:shadow-lg"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={imageUrl}
+          alt={`${name} 화면`}
+          className="w-full object-cover object-top"
+        />
+      </a>
+    );
+  }
+  return null;
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -103,21 +175,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </a>
       </header>
 
-      {project.imageUrl && (
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-8 block overflow-hidden rounded-xl border border-border/60 bg-muted shadow-sm transition-shadow hover:shadow-lg"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.imageUrl}
-            alt={`${project.name} 화면`}
-            className="w-full object-cover object-top"
-          />
-        </a>
-      )}
+      <ProjectMedia
+        videoUrl={project.videoUrl}
+        imageUrl={project.imageUrl}
+        url={project.url}
+        name={project.name}
+      />
 
       <Separator className="my-10" />
 

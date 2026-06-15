@@ -50,7 +50,7 @@ export function GuestbookHero() {
         className="hero-glow pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto h-64 w-2/3 rounded-full bg-gradient-to-br from-primary/20 via-fuchsia-500/10 to-sky-500/20 blur-3xl"
       />
       <p className="hero-eyebrow text-xs uppercase tracking-[0.3em] text-muted-foreground">
-        Team Hackuva · Guestbook
+        qwerty2944 · Guestbook
       </p>
       <h1 className="mt-3 text-5xl font-semibold tracking-tight sm:text-6xl">
         {Array.from(title).map((c, i) => (

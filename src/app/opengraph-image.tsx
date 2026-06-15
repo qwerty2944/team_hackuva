@@ -39,7 +39,7 @@ export default function OpengraphImage() {
               letterSpacing: "-0.05em",
             }}
           >
-            H
+            Q
           </div>
           <div
             style={{
@@ -50,7 +50,7 @@ export default function OpengraphImage() {
               textTransform: "uppercase",
             }}
           >
-            Team Hackuva
+            qwerty2944
           </div>
         </div>
 

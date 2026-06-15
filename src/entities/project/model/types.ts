@@ -11,4 +11,6 @@ export type Project = {
   status: ProjectStatus;
   accent: string;
   imageUrl: string | null;
+  videoUrl: string | null;
+  year: number | null;
 };

@@ -5,7 +5,7 @@ import { getCurrentUser } from "@/entities/user/server";
 
 export const metadata: Metadata = {
   title: "블로그",
-  description: "Team Hackuva가 만든 과정을 기록하는 곳.",
+  description: "qwerty2944가 만들고 배운 과정을 기록하는 곳.",
 };
 
 export default async function BlogPage() {

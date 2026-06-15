@@ -186,6 +186,8 @@ export type Database = {
           tagline: string;
           updated_at: string;
           url: string;
+          video_url: string | null;
+          year: number | null;
         };
         Insert: {
           accent?: string;
@@ -195,6 +197,8 @@ export type Database = {
           features?: string[];
           id?: number;
           image_url?: string | null;
+          video_url?: string | null;
+          year?: number | null;
           name: string;
           slug: string;
           sort_order?: number;
@@ -212,6 +216,8 @@ export type Database = {
           features?: string[];
           id?: number;
           image_url?: string | null;
+          video_url?: string | null;
+          year?: number | null;
           name?: string;
           slug?: string;
           sort_order?: number;

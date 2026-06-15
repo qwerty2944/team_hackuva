@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Play } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -39,6 +39,11 @@ export function ProjectCard({ project }: { project: Project }) {
             loading="lazy"
             className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
           />
+          {project.videoUrl && (
+            <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-black/70 px-2 py-0.5 text-[11px] font-medium text-white backdrop-blur">
+              <Play className="size-3 fill-current" /> 시연영상
+            </span>
+          )}
         </div>
       )}
       <CardHeader className="relative">

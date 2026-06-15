@@ -32,6 +32,8 @@ export function ProjectForm({
     status: "live" | "beta" | "wip";
     accent: string;
     imageUrl: string | null;
+    videoUrl: string | null;
+    year: number | null;
   };
 }) {
   const [state, formAction] = useActionState<ProjectComposeState, FormData>(
@@ -98,6 +100,30 @@ export function ProjectForm({
           defaultValue={initial?.imageUrl ?? ""}
           placeholder="예: /projects/my-site.png 또는 https://..."
         />
+      </div>
+      <div className="grid gap-1.5 sm:grid-cols-2 sm:gap-4">
+        <div className="grid gap-1.5">
+          <Label htmlFor="project-year">연도 (선택)</Label>
+          <Input
+            id="project-year"
+            name="year"
+            type="number"
+            min={2000}
+            max={2100}
+            defaultValue={initial?.year ?? ""}
+            placeholder="예: 2026"
+          />
+        </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor="project-video">시연영상 URL (선택)</Label>
+          <Input
+            id="project-video"
+            name="videoUrl"
+            type="text"
+            defaultValue={initial?.videoUrl ?? ""}
+            placeholder="YouTube 또는 Google Drive 링크"
+          />
+        </div>
       </div>
       <div className="grid gap-1.5">
         <Label htmlFor="project-stack">기술 스택 (쉼표로 구분)</Label>
