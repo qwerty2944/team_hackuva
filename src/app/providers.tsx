@@ -11,7 +11,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
     () =>
       new QueryClient({
         defaultOptions: {
-          queries: { refetchOnWindowFocus: false, retry: 1 },
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+            staleTime: 60_000, // 1분 fresh
+            gcTime: 5 * 60_000, // 5분 보관 (gcTime ≥ staleTime → 재방문 시 빈 화면 없이)
+          },
         },
       }),
   );

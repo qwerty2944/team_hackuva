@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { http } from "@/shared/api/http";
 import type { Post } from "../model/types";
 
@@ -22,5 +22,7 @@ export function usePosts(params: { q?: string; tag?: string } = {}) {
       return data.posts;
     },
     staleTime: 30_000,
+    // 태그·검색을 바꿔도 이전 목록을 유지 → 스켈레톤으로 붕괴(레이아웃 시프트) 방지
+    placeholderData: keepPreviousData,
   });
 }

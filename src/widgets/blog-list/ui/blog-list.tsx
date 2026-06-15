@@ -49,7 +49,10 @@ export function BlogList({
   isAdmin: boolean;
 }) {
   const { searchQuery, selectedTag } = useBlogFilters();
-  const { data, isLoading } = usePosts({ q: searchQuery, tag: selectedTag });
+  const { data, isLoading, isPlaceholderData } = usePosts({
+    q: searchQuery,
+    tag: selectedTag,
+  });
   const items = data ?? [];
 
   // 검색·태그 필터가 없을 때만 시리즈별로 묶어서 보여준다.
@@ -83,7 +86,12 @@ export function BlogList({
           조건에 맞는 글이 없어요.
         </div>
       ) : grouped ? (
-        <div className="space-y-10">
+        <div
+          className={cn(
+            "space-y-10 transition-opacity",
+            isPlaceholderData && "opacity-60",
+          )}
+        >
           {groupBySeries(items).map((group) => (
             <section key={group.label} className="space-y-4">
               <div className="flex items-baseline gap-2 border-b border-border/60 pb-2">
@@ -103,7 +111,12 @@ export function BlogList({
           ))}
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div
+          className={cn(
+            "grid gap-4 transition-opacity sm:grid-cols-2",
+            isPlaceholderData && "opacity-60",
+          )}
+        >
           {items.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}

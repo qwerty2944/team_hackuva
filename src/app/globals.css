@@ -131,6 +131,13 @@
   }
 }
 
+/* skeleton shimmer sweep (좌 → 우) */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* highlight.js syntax tokens — GitHub-like palette, theme-aware */
 .hljs-comment,
 .hljs-quote {
