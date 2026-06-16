@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, Pencil } from "lucide-react";
 import { getProject } from "@/entities/project/server";
+import { RoleBadges } from "@/entities/project/ui/project-card";
 import { PostCard } from "@/entities/post";
 import { listPosts } from "@/entities/post/server";
 import { getCurrentUser } from "@/entities/user/server";
@@ -163,6 +164,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <h1 className="text-4xl font-semibold tracking-tight">
           {project.name}
         </h1>
+        <RoleBadges roles={project.roles} />
         <p className="text-lg text-muted-foreground">{project.tagline}</p>
         <a
           href={project.url}

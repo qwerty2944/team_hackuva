@@ -55,6 +55,10 @@ export async function saveProjectAction(
   const videoUrl = String(formData.get("videoUrl") ?? "").trim() || null;
   const yearRaw = String(formData.get("year") ?? "").trim();
   const year = yearRaw ? Number(yearRaw) : null;
+  const roles = formData
+    .getAll("roles")
+    .map((r) => String(r).trim())
+    .filter(Boolean);
 
   if (!name || !tagline || !description || !url) {
     return { ok: false, error: "이름, 태그라인, 소개, 라이브 URL은 필수입니다." };
@@ -80,6 +84,7 @@ export async function saveProjectAction(
         image_url: imageUrl,
         video_url: videoUrl,
         year,
+        roles,
       })
       .eq("slug", existingSlug);
     if (error) return { ok: false, error: error.message };
@@ -112,6 +117,7 @@ export async function saveProjectAction(
     image_url: imageUrl,
     video_url: videoUrl,
     year,
+    roles,
     author_id: current.profile.id,
   });
   if (error) return { ok: false, error: error.message };

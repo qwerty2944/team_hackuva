@@ -40,9 +40,10 @@ export default async function AboutPage() {
       <section className="space-y-3">
         <h2 className="text-xl font-semibold tracking-tight">제가 믿는 것</h2>
         <ul className="space-y-2 text-muted-foreground">
-          <li>· 데모는 며칠, 라이브는 몇 주 안에.</li>
-          <li>· 사용자 한 명에게 진짜로 쓸 만한 걸 만든다.</li>
-          <li>· UI는 절제, 기능은 또렷하게.</li>
+          <li>· 앱(Flutter)·웹(Next.js)·백엔드(NestJS·Supabase)를 한 사람이 끝까지.</li>
+          <li>· 아이디어 → 데모 → 라이브를 며칠·몇 주 안에. (Claude·Cursor로 고속 개발)</li>
+          <li>· 시선추적·AI/RAG처럼 어려운 걸 실제 쓰는 제품으로.</li>
+          <li>· 외주든 사이드든, 한 명에게 진짜 쓸 만한 걸 만든다.</li>
         </ul>
       </section>
 

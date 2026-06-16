@@ -13,4 +13,5 @@ export type Project = {
   imageUrl: string | null;
   videoUrl: string | null;
   year: number | null;
+  roles: string[];
 };

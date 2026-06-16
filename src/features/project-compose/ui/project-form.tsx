@@ -8,6 +8,8 @@ import { Textarea } from "@/shared/ui/textarea";
 import { LoadingButton } from "@/shared/ui/loading-button";
 import { saveProjectAction, type ProjectComposeState } from "../api/actions";
 
+const ROLE_OPTIONS = ["앱", "웹 프론트", "백엔드"];
+
 const ACCENT_PRESETS: Array<{ label: string; value: string }> = [
   { label: "Zinc (기본)", value: "from-zinc-500/20 to-zinc-700/10" },
   { label: "Sky", value: "from-sky-500/20 to-cyan-500/10" },
@@ -34,6 +36,7 @@ export function ProjectForm({
     imageUrl: string | null;
     videoUrl: string | null;
     year: number | null;
+    roles: string[];
   };
 }) {
   const [state, formAction] = useActionState<ProjectComposeState, FormData>(
@@ -123,6 +126,23 @@ export function ProjectForm({
             defaultValue={initial?.videoUrl ?? ""}
             placeholder="YouTube 또는 Google Drive 링크"
           />
+        </div>
+      </div>
+      <div className="grid gap-1.5">
+        <Label>기여 (뱃지)</Label>
+        <div className="flex flex-wrap gap-4">
+          {ROLE_OPTIONS.map((r) => (
+            <label key={r} className="flex items-center gap-1.5 text-sm">
+              <input
+                type="checkbox"
+                name="roles"
+                value={r}
+                defaultChecked={initial?.roles?.includes(r)}
+                className="size-4 rounded border-input accent-foreground"
+              />
+              {r}
+            </label>
+          ))}
         </div>
       </div>
       <div className="grid gap-1.5">

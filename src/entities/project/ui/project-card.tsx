@@ -17,6 +17,31 @@ const statusLabel: Record<ProjectStatus, string> = {
   wip: "WIP",
 };
 
+const roleClass: Record<string, string> = {
+  앱: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300",
+  "웹 프론트": "bg-sky-500/15 text-sky-600 dark:text-sky-300",
+  백엔드: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300",
+};
+
+export function RoleBadges({ roles }: { roles: string[] }) {
+  if (roles.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {roles.map((r) => (
+        <span
+          key={r}
+          className={cn(
+            "rounded px-1.5 py-0.5 text-[11px] font-medium",
+            roleClass[r] ?? "bg-muted text-muted-foreground",
+          )}
+        >
+          {r}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Card
@@ -60,6 +85,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </CardHeader>
       <CardContent className="relative space-y-4">
+        <RoleBadges roles={project.roles} />
         <p className="text-sm text-muted-foreground">{project.description}</p>
         <div className="flex flex-wrap gap-1.5">
           {project.stack.map((s) => (
