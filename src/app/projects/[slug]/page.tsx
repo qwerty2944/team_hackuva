@@ -166,17 +166,41 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </h1>
         <RoleBadges roles={project.roles} />
         <p className="text-lg text-muted-foreground">{project.tagline}</p>
-        {project.url && (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            className={cn(buttonVariants())}
-          >
-            라이브 서비스 열기
-            <ArrowUpRight className="ml-1.5 size-4" />
-          </a>
-        )}
+        <div className="flex flex-wrap gap-2">
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants())}
+            >
+              라이브 서비스 열기
+              <ArrowUpRight className="ml-1.5 size-4" />
+            </a>
+          )}
+          {project.iosUrl && (
+            <a
+              href={project.iosUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants({ variant: "outline" }))}
+            >
+               App Store
+              <ArrowUpRight className="ml-1.5 size-4" />
+            </a>
+          )}
+          {project.androidUrl && (
+            <a
+              href={project.androidUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants({ variant: "outline" }))}
+            >
+              ▶ Google Play
+              <ArrowUpRight className="ml-1.5 size-4" />
+            </a>
+          )}
+        </div>
       </header>
 
       <ProjectMedia

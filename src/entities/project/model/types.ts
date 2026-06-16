@@ -14,4 +14,6 @@ export type Project = {
   videoUrl: string | null;
   year: number | null;
   roles: string[];
+  iosUrl: string | null;
+  androidUrl: string | null;
 };

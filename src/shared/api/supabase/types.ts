@@ -189,6 +189,8 @@ export type Database = {
           video_url: string | null;
           year: number | null;
           roles: string[];
+          ios_url: string | null;
+          android_url: string | null;
         };
         Insert: {
           accent?: string;
@@ -201,6 +203,8 @@ export type Database = {
           video_url?: string | null;
           year?: number | null;
           roles?: string[];
+          ios_url?: string | null;
+          android_url?: string | null;
           name: string;
           slug: string;
           sort_order?: number;
@@ -221,6 +225,8 @@ export type Database = {
           video_url?: string | null;
           year?: number | null;
           roles?: string[];
+          ios_url?: string | null;
+          android_url?: string | null;
           name?: string;
           slug?: string;
           sort_order?: number;

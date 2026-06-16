@@ -37,6 +37,8 @@ export function ProjectForm({
     videoUrl: string | null;
     year: number | null;
     roles: string[];
+    iosUrl: string | null;
+    androidUrl: string | null;
   };
 }) {
   const [state, formAction] = useActionState<ProjectComposeState, FormData>(
@@ -143,6 +145,28 @@ export function ProjectForm({
               {r}
             </label>
           ))}
+        </div>
+      </div>
+      <div className="grid gap-1.5 sm:grid-cols-2 sm:gap-4">
+        <div className="grid gap-1.5">
+          <Label htmlFor="project-ios">App Store URL (선택)</Label>
+          <Input
+            id="project-ios"
+            name="iosUrl"
+            type="text"
+            defaultValue={initial?.iosUrl ?? ""}
+            placeholder="https://apps.apple.com/..."
+          />
+        </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor="project-android">Play Store URL (선택)</Label>
+          <Input
+            id="project-android"
+            name="androidUrl"
+            type="text"
+            defaultValue={initial?.androidUrl ?? ""}
+            placeholder="https://play.google.com/..."
+          />
         </div>
       </div>
       <div className="grid gap-1.5">
