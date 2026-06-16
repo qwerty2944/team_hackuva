@@ -19,6 +19,7 @@ const statusLabel: Record<ProjectStatus, string> = {
 
 const roleClass: Record<string, string> = {
   앱: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300",
+  데스크톱앱: "bg-amber-500/15 text-amber-600 dark:text-amber-300",
   "웹 프론트": "bg-sky-500/15 text-sky-600 dark:text-sky-300",
   백엔드: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300",
 };
@@ -79,9 +80,16 @@ export function ProjectCard({ project }: { project: Project }) {
             </CardTitle>
             <CardDescription>{project.tagline}</CardDescription>
           </div>
-          <Badge variant="secondary" className="shrink-0 uppercase">
-            {statusLabel[project.status]}
-          </Badge>
+          <div className="flex shrink-0 flex-col items-end gap-1">
+            <Badge variant="secondary" className="uppercase">
+              {statusLabel[project.status]}
+            </Badge>
+            {project.videoUrl && !project.imageUrl && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-foreground/10 px-2 py-0.5 text-[11px] font-medium">
+                <Play className="size-3 fill-current" /> 시연영상
+              </span>
+            )}
+          </div>
         </div>
       </CardHeader>
       <CardContent className="relative space-y-4">
@@ -101,15 +109,17 @@ export function ProjectCard({ project }: { project: Project }) {
           >
             자세히 보기
           </Link>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
-          >
-            라이브
-            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              라이브
+              <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          )}
         </div>
       </CardContent>
     </Card>

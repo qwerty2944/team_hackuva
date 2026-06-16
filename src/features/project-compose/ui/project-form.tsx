@@ -8,7 +8,7 @@ import { Textarea } from "@/shared/ui/textarea";
 import { LoadingButton } from "@/shared/ui/loading-button";
 import { saveProjectAction, type ProjectComposeState } from "../api/actions";
 
-const ROLE_OPTIONS = ["앱", "웹 프론트", "백엔드"];
+const ROLE_OPTIONS = ["앱", "데스크톱앱", "웹 프론트", "백엔드"];
 
 const ACCENT_PRESETS: Array<{ label: string; value: string }> = [
   { label: "Zinc (기본)", value: "from-zinc-500/20 to-zinc-700/10" },

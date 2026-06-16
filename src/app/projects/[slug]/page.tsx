@@ -166,15 +166,17 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         </h1>
         <RoleBadges roles={project.roles} />
         <p className="text-lg text-muted-foreground">{project.tagline}</p>
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noreferrer"
-          className={cn(buttonVariants())}
-        >
-          라이브 서비스 열기
-          <ArrowUpRight className="ml-1.5 size-4" />
-        </a>
+        {project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(buttonVariants())}
+          >
+            라이브 서비스 열기
+            <ArrowUpRight className="ml-1.5 size-4" />
+          </a>
+        )}
       </header>
 
       <ProjectMedia
