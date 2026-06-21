@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/shared/config";
 import { listProjects } from "@/entities/project/server";
 import { Separator } from "@/shared/ui/separator";
+import { Badge } from "@/shared/ui/badge";
 import { buttonVariants } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
 
@@ -9,6 +10,17 @@ export const metadata: Metadata = {
   title: "소개",
   description: "qwerty2944(최재영)가 누구인지, 무엇을 만드는지.",
 };
+
+const SKILL_GROUPS: { label: string; items: string[] }[] = [
+  { label: "앱 (크로스플랫폼)", items: ["Flutter", "Dart", "Riverpod", "Electron"] },
+  {
+    label: "웹 프론트",
+    items: ["Next.js", "React", "TypeScript", "React Query", "Zustand", "Tailwind CSS"],
+  },
+  { label: "백엔드", items: ["NestJS", "Supabase", "Node.js", "PostgreSQL"] },
+  { label: "인프라 · DevOps", items: ["AWS", "Vercel", "Firebase"] },
+  { label: "AI · 시선추적", items: ["RAG (pgvector)", "Claude", "Gemini", "eyedid / SeeSo", "WebGL"] },
+];
 
 export default async function AboutPage() {
   const projects = await listProjects();
@@ -47,6 +59,31 @@ export default async function AboutPage() {
         </ul>
       </section>
 
+      <Separator className="my-10" />
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold tracking-tight">기술 스택</h2>
+        <dl className="space-y-3">
+          {SKILL_GROUPS.map((group) => (
+            <div
+              key={group.label}
+              className="flex flex-col gap-1.5 sm:flex-row sm:gap-4"
+            >
+              <dt className="w-36 shrink-0 pt-0.5 text-sm text-muted-foreground">
+                {group.label}
+              </dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {group.items.map((item) => (
+                  <Badge key={item} variant="secondary">
+                    {item}
+                  </Badge>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <section className="mt-10 space-y-3">
         <h2 className="text-xl font-semibold tracking-tight">지금까지 만든 것</h2>
         <ul className="space-y-2">
@@ -59,14 +96,16 @@ export default async function AboutPage() {
                 <p className="font-medium">{p.name}</p>
                 <p className="text-sm text-muted-foreground">{p.tagline}</p>
               </div>
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                라이브 ↗
-              </a>
+              {p.url ? (
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  라이브 ↗
+                </a>
+              ) : null}
             </li>
           ))}
         </ul>
