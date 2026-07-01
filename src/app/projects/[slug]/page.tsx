@@ -210,6 +210,20 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         name={project.name}
       />
 
+      {project.diagramUrl && (
+        <figure className="mt-4 space-y-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.diagramUrl}
+            alt={`${project.name} 아키텍처`}
+            className="w-full overflow-hidden rounded-xl border border-border/60 bg-muted"
+          />
+          <figcaption className="text-center text-xs text-muted-foreground">
+            인프라 아키텍처 · GCP VM에서 AWS로 이전
+          </figcaption>
+        </figure>
+      )}
+
       <Separator className="my-10" />
 
       <section className="space-y-3">

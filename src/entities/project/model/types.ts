@@ -12,6 +12,7 @@ export type Project = {
   accent: string;
   imageUrl: string | null;
   videoUrl: string | null;
+  diagramUrl: string | null;
   year: number | null;
   roles: string[];
   iosUrl: string | null;

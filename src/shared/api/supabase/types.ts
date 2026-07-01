@@ -178,6 +178,7 @@ export type Database = {
           features: string[];
           id: number;
           image_url: string | null;
+          diagram_url: string | null;
           name: string;
           slug: string;
           sort_order: number;
@@ -200,6 +201,7 @@ export type Database = {
           features?: string[];
           id?: number;
           image_url?: string | null;
+          diagram_url?: string | null;
           video_url?: string | null;
           year?: number | null;
           roles?: string[];
@@ -222,6 +224,7 @@ export type Database = {
           features?: string[];
           id?: number;
           image_url?: string | null;
+          diagram_url?: string | null;
           video_url?: string | null;
           year?: number | null;
           roles?: string[];

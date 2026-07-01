@@ -13,6 +13,7 @@ type RawRow = {
   accent: string;
   image_url: string | null;
   video_url: string | null;
+  diagram_url: string | null;
   year: number | null;
   roles: string[];
   ios_url: string | null;
@@ -36,6 +37,7 @@ function mapRow(row: RawRow): Project {
     accent: row.accent,
     imageUrl: row.image_url ?? null,
     videoUrl: row.video_url ?? null,
+    diagramUrl: row.diagram_url ?? null,
     year: row.year ?? null,
     roles: row.roles ?? [],
     iosUrl: row.ios_url ?? null,
@@ -48,7 +50,7 @@ export async function listProjects(): Promise<Project[]> {
   const { data, error } = await supabase
     .from("projects")
     .select(
-      "slug, name, tagline, description, url, features, stack, status, accent, image_url, video_url, year, roles, ios_url, android_url",
+      "slug, name, tagline, description, url, features, stack, status, accent, image_url, video_url, diagram_url, year, roles, ios_url, android_url",
     )
     .order("year", { ascending: false, nullsFirst: false })
     .order("sort_order", { ascending: true })
@@ -65,7 +67,7 @@ export async function getProject(slug: string): Promise<Project | null> {
   const { data, error } = await supabase
     .from("projects")
     .select(
-      "slug, name, tagline, description, url, features, stack, status, accent, image_url, video_url, year, roles, ios_url, android_url",
+      "slug, name, tagline, description, url, features, stack, status, accent, image_url, video_url, diagram_url, year, roles, ios_url, android_url",
     )
     .eq("slug", slug)
     .maybeSingle();
